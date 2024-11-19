@@ -443,42 +443,36 @@ To load the data, we need to specify the path to the zip-file. Here the
 example data is loaded using <code>read_odf()</code> Alternatively, you
 can set <code>file</code> to a zip-file in the working directory.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(opendataformat)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Lade nötiges Paket: magrittr</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; Lade nötiges Paket: xml2</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Lade nötiges Paket: data.table</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; Lade nötiges Paket: tibble</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;data.zip&quot;</span>, <span class="at">package =</span> <span class="st">&quot;opendataformat&quot;</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_odf</span>(<span class="at">file =</span> path)</span></code></pre></div>
-<p>The output of the <code>read_odf()</code> function is an R-tibble
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;data.zip&quot;</span>, <span class="at">package =</span> <span class="st">&quot;opendataformat&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_odf</span>(<span class="at">file =</span> path)</span></code></pre></div>
+<p>The output of the <code>read_odf()</code> function is an R-data.frame
 object, that has the additional class <code>odf</code>. It has
-additional metadata stored in the attributes of the tibble and the
+additional metadata stored in the attributes of the dataframe and the
 variables/columns. These include the languages of the metadata, labels,
 descriptions, urls, variable types, and value labels.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>df</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># A tibble: 20 × 7</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>   bap87 bap9201 bap9001 bap9002 bap9003 bap96 name       </span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>   <span class="sc">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span>   <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      </span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a> <span class="dv">1</span>     <span class="dv">4</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">2</span> <span class="sc">-</span><span class="dv">2</span>    <span class="st">&quot;Jakob&quot;</span>    </span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a> <span class="dv">2</span>     <span class="dv">3</span>       <span class="dv">5</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">4</span>  <span class="fl">1.57</span> <span class="st">&quot;Luca&quot;</span>     </span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a> <span class="dv">3</span>    <span class="cn">NA</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">2</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.92</span> <span class="st">&quot;Emilia&quot;</span>   </span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a> <span class="dv">4</span>     <span class="dv">1</span>       <span class="dv">9</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">4</span>  <span class="fl">1.85</span> <span class="st">&quot;-1&quot;</span>       </span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a> <span class="dv">5</span>    <span class="sc">-</span><span class="dv">1</span>       <span class="dv">4</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">1</span>  <span class="fl">1.91</span> <span class="st">&quot;Johanna&quot;</span>  </span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a> <span class="dv">6</span>     <span class="dv">3</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.8</span>  <span class="st">&quot;Paul&quot;</span>     </span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a> <span class="dv">7</span>     <span class="dv">1</span>       <span class="dv">9</span>       <span class="dv">2</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.8</span>  <span class="st">&quot;&quot;</span>         </span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a> <span class="dv">8</span>     <span class="dv">5</span>       <span class="dv">6</span>       <span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">1</span>  <span class="fl">1.96</span> <span class="st">&quot;Mia&quot;</span>      </span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a> <span class="dv">9</span>     <span class="dv">5</span>       <span class="dv">5</span>       <span class="dv">5</span>       <span class="dv">3</span>       <span class="dv">1</span>  <span class="fl">1.64</span> <span class="st">&quot;Ben&quot;</span>      </span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="dv">10</span>    <span class="sc">-</span><span class="dv">2</span>       <span class="dv">4</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.93</span> <span class="st">&quot;Jakob&quot;</span>    </span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dv">11</span>    <span class="sc">-</span><span class="dv">1</span>       <span class="dv">4</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">5</span>  <span class="fl">1.93</span> <span class="st">&quot;Anton&quot;</span>    </span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="dv">12</span>    <span class="sc">-</span><span class="dv">2</span>       <span class="dv">5</span>       <span class="dv">3</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">4</span> <span class="cn">NA</span>    <span class="st">&quot;Charlotte&quot;</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="dv">13</span>     <span class="dv">3</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">2</span>  <span class="fl">1.74</span> <span class="st">&quot;Luca&quot;</span>     </span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="dv">14</span>     <span class="dv">2</span>      <span class="sc">-</span><span class="dv">2</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.65</span> <span class="st">&quot;Maria&quot;</span>    </span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="dv">15</span>     <span class="dv">5</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">2</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.8</span>  <span class="st">&quot;Johanna&quot;</span>  </span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="dv">16</span>     <span class="dv">4</span>       <span class="dv">5</span>       <span class="dv">1</span>       <span class="dv">3</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.58</span> <span class="st">&quot;Emma&quot;</span>     </span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="dv">17</span>     <span class="dv">3</span>       <span class="dv">7</span>       <span class="dv">1</span>       <span class="dv">2</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.95</span> <span class="st">&quot;Felix&quot;</span>    </span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="dv">18</span>     <span class="dv">3</span>      <span class="cn">NA</span>       <span class="dv">5</span>       <span class="dv">3</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.98</span> <span class="st">&quot;David&quot;</span>    </span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="dv">19</span>    <span class="sc">-</span><span class="dv">2</span>       <span class="dv">8</span>       <span class="dv">1</span>       <span class="dv">4</span>       <span class="dv">5</span>  <span class="fl">1.61</span> <span class="st">&quot;-2&quot;</span>       </span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="dv">20</span>     <span class="dv">2</span>       <span class="dv">8</span>       <span class="dv">3</span>       <span class="dv">1</span>       <span class="dv">2</span>  <span class="fl">1.83</span> <span class="st">&quot;Anton&quot;</span>    </span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>   bap87 bap9201 bap9001 bap9002 bap9003 bap96      name</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="dv">1</span>      <span class="dv">4</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">2</span> <span class="sc">-</span><span class="fl">2.00</span>     Jakob</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dv">2</span>      <span class="dv">3</span>       <span class="dv">5</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">4</span>  <span class="fl">1.57</span>      Luca</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dv">3</span>     <span class="cn">NA</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">2</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.92</span>    Emilia</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dv">4</span>      <span class="dv">1</span>       <span class="dv">9</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">4</span>  <span class="fl">1.85</span>        <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dv">5</span>     <span class="sc">-</span><span class="dv">1</span>       <span class="dv">4</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">1</span>  <span class="fl">1.91</span>   Johanna</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="dv">6</span>      <span class="dv">3</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.80</span>      Paul</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dv">7</span>      <span class="dv">1</span>       <span class="dv">9</span>       <span class="dv">2</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.80</span>          </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="dv">8</span>      <span class="dv">5</span>       <span class="dv">6</span>       <span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">1</span>  <span class="fl">1.96</span>       Mia</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="dv">9</span>      <span class="dv">5</span>       <span class="dv">5</span>       <span class="dv">5</span>       <span class="dv">3</span>       <span class="dv">1</span>  <span class="fl">1.64</span>       Ben</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="dv">10</span>    <span class="sc">-</span><span class="dv">2</span>       <span class="dv">4</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.93</span>     Jakob</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="dv">11</span>    <span class="sc">-</span><span class="dv">1</span>       <span class="dv">4</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">5</span>  <span class="fl">1.93</span>     Anton</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="dv">12</span>    <span class="sc">-</span><span class="dv">2</span>       <span class="dv">5</span>       <span class="dv">3</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">4</span>    <span class="cn">NA</span> Charlotte</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="dv">13</span>     <span class="dv">3</span>      <span class="sc">-</span><span class="dv">1</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">2</span>  <span class="fl">1.74</span>      Luca</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="dv">14</span>     <span class="dv">2</span>      <span class="sc">-</span><span class="dv">2</span>      <span class="sc">-</span><span class="dv">2</span>       <span class="dv">4</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.65</span>     Maria</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="dv">15</span>     <span class="dv">5</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">2</span>      <span class="sc">-</span><span class="dv">1</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.80</span>   Johanna</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="dv">16</span>     <span class="dv">4</span>       <span class="dv">5</span>       <span class="dv">1</span>       <span class="dv">3</span>      <span class="sc">-</span><span class="dv">1</span>  <span class="fl">1.58</span>      Emma</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="dv">17</span>     <span class="dv">3</span>       <span class="dv">7</span>       <span class="dv">1</span>       <span class="dv">2</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.95</span>     Felix</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="dv">18</span>     <span class="dv">3</span>      <span class="cn">NA</span>       <span class="dv">5</span>       <span class="dv">3</span>      <span class="sc">-</span><span class="dv">2</span>  <span class="fl">1.98</span>     David</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="dv">19</span>    <span class="sc">-</span><span class="dv">2</span>       <span class="dv">8</span>       <span class="dv">1</span>       <span class="dv">4</span>       <span class="dv">5</span>  <span class="fl">1.61</span>        <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="dv">20</span>     <span class="dv">2</span>       <span class="dv">8</span>       <span class="dv">3</span>       <span class="dv">1</span>       <span class="dv">2</span>  <span class="fl">1.83</span>     Anton</span></code></pre></div>
 <p>If you load the haven package, you see the variable labels in the <a href="#set-the-active-language-of-a-data-frame-setlanguage_odf">active
 language</a> .</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
@@ -532,14 +526,14 @@ To display metadata information only in the viewer, set
 <span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; [1mURL:[0m</span></span>
 <span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt;     https://paneldata.org/soep-core/data/bap</span></span>
 <span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt; [1mVariables:[0m</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt;   Variable                                 Label en</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; 1    bap87 Data from individual questionnaires 2010</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; 2  bap9201 Data from individual questionnaires 2010</span></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; 3  bap9001 Data from individual questionnaires 2010</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; 4  bap9002 Data from individual questionnaires 2010</span></span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; 5  bap9003 Data from individual questionnaires 2010</span></span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt; 6    bap96 Data from individual questionnaires 2010</span></span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; 7     name Data from individual questionnaires 2010</span></span></code></pre></div>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt;   Variable                          Label en</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; 1    bap87                    Current Health</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; 2  bap9201    hours of sleep, normal workday</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; 3  bap9001     Pressed For Time Last 4 Weeks</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; 4  bap9002 Run-down, Melancholy Last 4 Weeks</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; 5  bap9003        Well-balanced Last 4 Weeks</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt; 6    bap96                            Height</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; 7     name                         Firstname</span></span></code></pre></div>
 <p>To obtain a comprehensive overview of all variables within the
 dataset, simply set the argument <code>variables=&quot;yes&quot;</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">docu_odf</span>(df, <span class="at">variables =</span> <span class="st">&quot;yes&quot;</span>, <span class="at">style =</span> <span class="st">&quot;print&quot;</span>)</span>
@@ -553,14 +547,14 @@ dataset, simply set the argument <code>variables=&quot;yes&quot;</code>.</p>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="st">[1mURL:[0m</span></span>
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="st">    https://paneldata.org/soep-core/data/bap</span></span>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="st">[1mVariables:[0m</span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="st">  Variable                                 Label en</span></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="st">1    bap87 Data from individual questionnaires 2010</span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="st">2  bap9201 Data from individual questionnaires 2010</span></span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="st">3  bap9001 Data from individual questionnaires 2010</span></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="st">4  bap9002 Data from individual questionnaires 2010</span></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="st">5  bap9003 Data from individual questionnaires 2010</span></span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="st">6    bap96 Data from individual questionnaires 2010</span></span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="st">7     name Data from individual questionnaires 2010</span></span></code></pre></div>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="st">  Variable                          Label en</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="st">1    bap87                    Current Health</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="st">2  bap9201    hours of sleep, normal workday</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="st">3  bap9001     Pressed For Time Last 4 Weeks</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="st">4  bap9002 Run-down, Melancholy Last 4 Weeks</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="st">5  bap9003        Well-balanced Last 4 Weeks</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="st">6    bap96                            Height</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="st">7     name                         Firstname</span></span></code></pre></div>
 <p>If you are interested in just one specific variable, you can do
 this:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">docu_odf</span>(df<span class="sc">$</span>bap9001, <span class="at">style =</span> <span class="st">&quot;print&quot;</span>)</span>
@@ -684,54 +678,51 @@ for analysis purposes.</p>
 <h3>Retrieve the Attributes with <code>attributes()</code> and
 <code>attr()</code></h3>
 <p>Another way is to retrieve metadata directly from the attributes. The
-metadata imported from the Open Data Format file into an R tibble
-(dataframe) is stored as R attributes. By using the base R functions
+metadata imported from the Open Data Format file into an R dataframe is
+stored as R attributes. By using the base R functions
 <code>attributes()</code> and <code>attr()</code>, you can easily access
 this metadata. When providing the entire dataset to the function, R will
 display all the metadata describing the dataset as a whole in your
 console.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">attributes</span>(df)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="sc">$</span>row.names</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a> [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span> <span class="dv">11</span> <span class="dv">12</span> <span class="dv">13</span> <span class="dv">14</span> <span class="dv">15</span> <span class="dv">16</span> <span class="dv">17</span> <span class="dv">18</span> <span class="dv">19</span> <span class="dv">20</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="sc">$</span>names</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;bap87&quot;</span>   <span class="st">&quot;bap9201&quot;</span> <span class="st">&quot;bap9001&quot;</span> <span class="st">&quot;bap9002&quot;</span> <span class="st">&quot;bap9003&quot;</span> <span class="st">&quot;bap96&quot;</span>   <span class="st">&quot;name&quot;</span>   </span>
 <span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="sc">$</span>names</span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;bap87&quot;</span>   <span class="st">&quot;bap9201&quot;</span> <span class="st">&quot;bap9001&quot;</span> <span class="st">&quot;bap9002&quot;</span> <span class="st">&quot;bap9003&quot;</span> <span class="st">&quot;bap96&quot;</span>   <span class="st">&quot;name&quot;</span>   </span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="sc">$</span>row.names</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a> [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span> <span class="dv">11</span> <span class="dv">12</span> <span class="dv">13</span> <span class="dv">14</span> <span class="dv">15</span> <span class="dv">16</span> <span class="dv">17</span> <span class="dv">18</span> <span class="dv">19</span> <span class="dv">20</span></span>
 <span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="sc">$</span>.internal.selfref</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="sc">&lt;</span>pointer<span class="sc">:</span> <span class="dv">0x000002c3cd84c390</span><span class="sc">&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="sc">$</span>study</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;soep-core v38.1&quot;</span></span>
 <span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="er">$</span>study</span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;soep-core v38.1&quot;</span></span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="sc">$</span>name</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;bap&quot;</span></span>
 <span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="sc">$</span>name</span>
-<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;bap&quot;</span></span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="sc">$</span>description_en</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;The data were collected as part of the SOEP-Core study using the questionnaire </span><span class="sc">\&quot;</span><span class="st">Living in Germany - Survey 2010 on the social situation - Personal questionnaire for all. This questionnaire is addressed to the individual persons in the household. A view of the survey instrument can be found here: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf&quot;</span></span>
 <span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a></span>
-<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a><span class="sc">$</span>description_en</span>
-<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;The data were collected as part of the SOEP-Core study using the questionnaire </span><span class="sc">\&quot;</span><span class="st">Living in Germany - Survey 2010 on the social situation - Personal questionnaire for all. This questionnaire is addressed to the individual persons in the household. A view of the survey instrument can be found here: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf&quot;</span></span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a><span class="sc">$</span>description_de</span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Die Daten wurden im Rahmen der Studie SOEP-Core mittels des Fragebogens „Leben in Deutschland – Befragung 2010 zur sozialen Lage - Personenfragebogen für alle“ erhoben. Dieser Fragebogen richtet sich an die einzelnen Personen im Haushalt. Eine Ansicht des Erhebungsinstrumentes finden Sie hier: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf&quot;</span></span>
 <span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a></span>
-<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a><span class="sc">$</span>description_de</span>
-<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Die Daten wurden im Rahmen der Studie SOEP-Core mittels des Fragebogens „Leben in Deutschland – Befragung 2010 zur sozialen Lage - Personenfragebogen für alle“ erhoben. Dieser Fragebogen richtet sich an die einzelnen Personen im Haushalt. Eine Ansicht des Erhebungsinstrumentes finden Sie hier: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf&quot;</span></span>
+<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a><span class="sc">$</span>label_en</span>
+<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Data from individual questionnaires 2010&quot;</span></span>
 <span id="cb21-22"><a href="#cb21-22" tabindex="-1"></a></span>
-<span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a><span class="sc">$</span>label_en</span>
-<span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Data from individual questionnaires 2010&quot;</span></span>
+<span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a><span class="sc">$</span>label_de</span>
+<span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Daten vom Personenfragebogen 2010&quot;</span></span>
 <span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a></span>
-<span id="cb21-26"><a href="#cb21-26" tabindex="-1"></a><span class="sc">$</span>label_de</span>
-<span id="cb21-27"><a href="#cb21-27" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Daten vom Personenfragebogen 2010&quot;</span></span>
+<span id="cb21-26"><a href="#cb21-26" tabindex="-1"></a><span class="sc">$</span>url</span>
+<span id="cb21-27"><a href="#cb21-27" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;https://paneldata.org/soep-core/data/bap&quot;</span></span>
 <span id="cb21-28"><a href="#cb21-28" tabindex="-1"></a></span>
-<span id="cb21-29"><a href="#cb21-29" tabindex="-1"></a><span class="sc">$</span>url</span>
-<span id="cb21-30"><a href="#cb21-30" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;https://paneldata.org/soep-core/data/bap&quot;</span></span>
+<span id="cb21-29"><a href="#cb21-29" tabindex="-1"></a><span class="sc">$</span>languages</span>
+<span id="cb21-30"><a href="#cb21-30" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;en&quot;</span> <span class="st">&quot;de&quot;</span></span>
 <span id="cb21-31"><a href="#cb21-31" tabindex="-1"></a></span>
-<span id="cb21-32"><a href="#cb21-32" tabindex="-1"></a><span class="sc">$</span>languages</span>
-<span id="cb21-33"><a href="#cb21-33" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;en&quot;</span> <span class="st">&quot;de&quot;</span></span>
+<span id="cb21-32"><a href="#cb21-32" tabindex="-1"></a><span class="sc">$</span>lang</span>
+<span id="cb21-33"><a href="#cb21-33" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;en&quot;</span></span>
 <span id="cb21-34"><a href="#cb21-34" tabindex="-1"></a></span>
-<span id="cb21-35"><a href="#cb21-35" tabindex="-1"></a><span class="sc">$</span>lang</span>
-<span id="cb21-36"><a href="#cb21-36" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;en&quot;</span></span>
+<span id="cb21-35"><a href="#cb21-35" tabindex="-1"></a><span class="sc">$</span>label</span>
+<span id="cb21-36"><a href="#cb21-36" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Data from individual questionnaires 2010&quot;</span></span>
 <span id="cb21-37"><a href="#cb21-37" tabindex="-1"></a></span>
-<span id="cb21-38"><a href="#cb21-38" tabindex="-1"></a><span class="sc">$</span>label</span>
-<span id="cb21-39"><a href="#cb21-39" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Data from individual questionnaires 2010&quot;</span></span>
-<span id="cb21-40"><a href="#cb21-40" tabindex="-1"></a></span>
-<span id="cb21-41"><a href="#cb21-41" tabindex="-1"></a><span class="sc">$</span>class</span>
-<span id="cb21-42"><a href="#cb21-42" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;odf&quot;</span>        <span class="st">&quot;tbl_df&quot;</span>     <span class="st">&quot;tbl&quot;</span>        <span class="st">&quot;data.frame&quot;</span></span></code></pre></div>
+<span id="cb21-38"><a href="#cb21-38" tabindex="-1"></a><span class="sc">$</span>class</span>
+<span id="cb21-39"><a href="#cb21-39" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;odf&quot;</span>        <span class="st">&quot;data.frame&quot;</span></span></code></pre></div>
 <p>If you provide a specific variable to the function, only the
 corresponding metadata for that variable will be printed.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">attributes</span>(df<span class="sc">$</span>bap87)</span>
@@ -932,7 +923,7 @@ The dataset looks the same as before, just with fewer variables:</p>
 </code></pre>
 <p>If you wish to export only the metadata for documentation or
 archiving purposes, you can achieve this by setting the argument
-<code>export_data=FALSE</code>. By doing so, the resulting directory or
+<code>export_data=&quot;no&quot;</code>. By doing so, the resulting directory or
 zip file will solely contain the metadata XML file, excluding the data
 CSV file. This allows you to specifically capture and preserve the
 metadata without including the actual data, providing a solution for
