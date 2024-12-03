@@ -1,6 +1,6 @@
 Package: opendataformat
 Title: Reading and Writing Open Data Format Files
-Version: 2.0.0
+Version: 2.1.0
 Authors@R: c(person("Tom", "Hartl", role = c("aut","cre"),
     email = "thartl@diw.de", comment = c(ORCID = "0009-0006-4226-9835")),
     person("Claudia","Saalbach", role = "ctb", 
@@ -19,8 +19,8 @@ Suggests: testthat (>= 3.0.0), knitr, rmarkdown, devtools, ISLR, dplyr,
         haven
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-11-19 07:06:24 UTC; thartl
+Packaged: 2024-12-03 12:22:58 UTC; thartl
 Author: Tom Hartl [aut, cre] (<https://orcid.org/0009-0006-4226-9835>),
   Claudia Saalbach [ctb]
 Repository: CRAN
-Date/Publication: 2024-11-19 07:20:02 UTC
+Date/Publication: 2024-12-03 12:50:07 UTC

@@ -1,8 +1,8 @@
-5ab4f948084475967a56d6de71cae967 *DESCRIPTION
+352f58f20169c79f1f752d0f78fc9bce *DESCRIPTION
 8ff3b1910102da9d69ace45ab8fc185a *LICENSE
 6e81aa7b72204930f12e35f99d3ae31d *NAMESPACE
 3fcc3c2defff4d9e7d25227b763f3214 *R/data.R
-0d60c563cb40b4b8d0e17c330c4d8c53 *R/docu_odf.R
+c364e0c3c4256a27e5c0782b918dbe4a *R/docu_odf.R
 12245132d4b03f45a95e2a5afe4675b0 *R/getmetadata_odf.R
 32b235194d7c3c10fe904ff13b0e488e *R/merge.R
 0efca67cadea1f984ca7c2644cb61fbe *R/opendataformat-package.R
@@ -13,7 +13,7 @@ a72d8e364495dc5504e1181aac27fce0 *R/write_odf.R
 1722309fe03c67948309893bdb2928fc *data/data_odf.rda
 1e844a074b4fae9c89760f264316d122 *inst/doc/opendataformat.R
 09b41ac3c093d284b21b435fa004bcb6 *inst/doc/opendataformat.Rmd
-f46156e72c1d81f7ae79a7e76f69569a *inst/doc/opendataformat.html
+88990d802e74d6a26e7c777478ec8f57 *inst/doc/opendataformat.html
 e244a6c4bd35ef5c77eb871156758483 *inst/extdata/data.zip
 96c984f1ff9030f3980d7eb6538fec56 *man/data_odf.Rd
 763c09207386076f62d30075dbc9978c *man/docu_odf.Rd
@@ -57,5 +57,6 @@ e44202d0928b8cf4026d322603abc9fa *tests/testthat/testdata/data_odf_with_default.
 5d614a1f8da956f3ec0e3e4c0f40b3ce *tests/testthat/testdata/data_odf_with_missings.RData
 9aceaf37513efc32add6d5e235eddc72 *tests/testthat/testdata/data_with_default.zip
 2e28eb0a8c2d93bd4e1bfa8e50c9a90e *tests/testthat/testdata/data_with_missings.zip
+cf7e6e1427670183fa29964ab4ae77c5 *vignettes/opendataformat-tom-D15S-2.html
 4c9661a99d98031f76f60d13e1aa9448 *vignettes/opendataformat-tom-D15S.html
 09b41ac3c093d284b21b435fa004bcb6 *vignettes/opendataformat.Rmd
