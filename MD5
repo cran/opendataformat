@@ -1,10 +1,10 @@
-352f58f20169c79f1f752d0f78fc9bce *DESCRIPTION
+bab51d90953ab86b946a3a7d54afd5dc *DESCRIPTION
 8ff3b1910102da9d69ace45ab8fc185a *LICENSE
 6e81aa7b72204930f12e35f99d3ae31d *NAMESPACE
 3fcc3c2defff4d9e7d25227b763f3214 *R/data.R
-c364e0c3c4256a27e5c0782b918dbe4a *R/docu_odf.R
+abbbf3b357015c1d3cb4d3e30bc98346 *R/docu_odf.R
 12245132d4b03f45a95e2a5afe4675b0 *R/getmetadata_odf.R
-32b235194d7c3c10fe904ff13b0e488e *R/merge.R
+d8a434b871f126806e7b5178d1e473df *R/merge.R
 0efca67cadea1f984ca7c2644cb61fbe *R/opendataformat-package.R
 0f739735b779fda1130a3e295b7160ac *R/read_odf.R
 f931ab6e1121f653910ed4a1d71f5b75 *R/setlanguage_odf.R
@@ -13,12 +13,12 @@ a72d8e364495dc5504e1181aac27fce0 *R/write_odf.R
 1722309fe03c67948309893bdb2928fc *data/data_odf.rda
 1e844a074b4fae9c89760f264316d122 *inst/doc/opendataformat.R
 09b41ac3c093d284b21b435fa004bcb6 *inst/doc/opendataformat.Rmd
-88990d802e74d6a26e7c777478ec8f57 *inst/doc/opendataformat.html
+eb1564da3daa8cc8c9284789a61e418c *inst/doc/opendataformat.html
 e244a6c4bd35ef5c77eb871156758483 *inst/extdata/data.zip
 96c984f1ff9030f3980d7eb6538fec56 *man/data_odf.Rd
 763c09207386076f62d30075dbc9978c *man/docu_odf.Rd
 dc2c38cd8efafdcaeee8387918fb971d *man/getmetadata_odf.Rd
-26780ca9934ff55fa214e3a86e3e1f81 *man/merge.odf.Rd
+0b0f51fab802e27e86b5ea98fd490f64 *man/merge.odf.Rd
 73d9ca7e1a90ab158c3888169155e324 *man/opendataformat-package.Rd
 b0bb19844fe79dafdb0266b64d513162 *man/read_odf.Rd
 6d71940235f958be9317836f280ab583 *man/setlanguage_odf.Rd
@@ -29,7 +29,7 @@ f86367f82bee752d8cee063d422a555b *tests/testthat.R
 68b24db900715ed0f45bee14b13877df *tests/testthat/test-read_odf.R
 bf06b717b0c9ae5e3e07dac9673564d5 *tests/testthat/test-write_odf.R
 7f6838df8bc9e193399531762ec8da99 *tests/testthat/test_getmetadata_odf.R
-2a81c6d9f387412019fde643e5c008c3 *tests/testthat/test_merge.R
+7dd8ada8b7dfd301332cfd03e6f96b54 *tests/testthat/test_merge.R
 df4dd638f8743f12a92d98ad35b8fcd0 *tests/testthat/testdata/csv/categories.csv
 addfadc0277b3b1d35c02f22f3dd29b1 *tests/testthat/testdata/csv/data.csv
 88e9185a784358c9fc642a8fc11dcdc3 *tests/testthat/testdata/csv/data.zip

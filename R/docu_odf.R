@@ -264,10 +264,21 @@ docu_odf <- function(input,
       var_list <- c(var_list, var)
       labls_var <- c()
       for (lang in languages) {
-        labls_var <- c(labls_var, attr(input[[var]], paste0("label", lang)))
-        labels_vars[[paste0("label", lang)]] <-
+        if( !is.null(attr(input[[var]], paste0("label", lang)))){
+          labls_var <- c(labls_var, attr(input[[var]], paste0("label", lang)))
+        } else {
+          labls_var <- c(labls_var, "")
+        }
+        if (!is.null(attr(input[[var]], paste0("label", lang)))){
+          labels_vars[[paste0("label", lang)]] <-
           as.character(c(unlist(labels_vars[paste0("label", lang)]),
                          attr(input[[var]], paste0("label", lang))))
+        } else {
+          labels_vars[[paste0("label", lang)]] <-
+            as.character(c(unlist(labels_vars[paste0("label", lang)]),
+                           ""))
+        }
+        
       }
       row_html <- paste0("<tr><td>", var, "</td>",
                          paste0("<td>", labls_var, "</td>",
@@ -393,7 +404,11 @@ docu_odf <- function(input,
     "\033[1mURL:\033[0m\n",
     paste0("    ", interactive_url, "\n")
   )
-
+  html_output <- paste0(
+    html_output,
+    "<p><b>URL:", "</b><br>", paste0("<a href = '", url, "'>", url, "</a></p>")
+  )
+  
   if (input_type == "Variable") {
     printing_output <- c(
       paste0(printing_output),
@@ -406,10 +421,7 @@ docu_odf <- function(input,
     )
   }
 
-  html_output <- paste0(
-    html_output,
-    "<p><b>URL:", "</b><br>", paste0("<a href = '", url, "'>", url, "</a></p>")
-  )
+
 
   #add variables information to dataset information
   if (input_type == "Dataset" && variables %in% c("yes", "Yes", "T", "TRUE", TRUE)) {
