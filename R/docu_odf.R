@@ -90,7 +90,7 @@ docu_odf <- function(input,
     stop("variables has to be one of following inputs: 'yes', 'Yes', 'T', 'TRUE', and TRUE")
   }
 
-  if (("data.frame" %in% class(input) && !("odf" %in% class(input))) ||
+  if (("data.frame" %in% class(input) && !("odf_tbl" %in% class(input))) ||
       (!("lang" %in% names(attributes(input))) &&
        !("languages" %in% names(attributes(input))))) {
     stop("Input is not a dataframe or variable in the odf-format.")
@@ -108,8 +108,10 @@ docu_odf <- function(input,
   input_lang <- unlist(attr(input, "lang"))
 
   #Check if languages argument is valid
-  if (!(languages %in% c(input_languages, "current", "default", "all")))
+  if (!(languages %in% c(input_languages, "current", "default", "all"))){
     stop("Your language selection is not valid.")
+  }
+    
 
 
   #if languages is set to default, but no default language exists, the current
@@ -215,6 +217,9 @@ docu_odf <- function(input,
   }
   #get url
   url <- attr(input, "url")
+  if (is.null(url)){
+    url <- ""
+  }
   if (url != "" && exists("style_hyperlink")) {
     interactive_url <- cli::style_hyperlink(
       text = url,
@@ -307,19 +312,6 @@ docu_odf <- function(input,
     "<h3>", input_type, ": ",  name, "</h3>"
   )
   
-  if (input_type == "Dataset") {
-    printing_output <- c(
-      printing_output,
-      "\033[1mstudy:\033[0m\n",
-      paste0("  ", study, "\n")
-    )
-    
-    html_output <- paste0(
-      html_output,
-      "<p><b>Study:</b>",
-      "<br>", study, "</p>"
-    )
-  }
 
   #label
   printing_output <- c(

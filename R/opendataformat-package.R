@@ -19,11 +19,18 @@
 #' ## docu_odf()
 #' Get access to information about the dataset
 #' and variables via the R-Studio Viewer or the web browser.
+#' 
+#' ## setlanguage_odf()
+#' Set the default language for displaying the metadata for docu_odf 
+#' and getmetadata_odf
+#'
+#' ## getmetadata_odf()
+#' Retrieve specific metadata like variable labels, or value labels.
 #'
 #' @seealso
 #' More information about the Open Data Format specification and
 #' data examples are available here:
-#' [https://git.soep.de/opendata/](https://git.soep.de/opendata/)
+#' [https://opendataformat.github.io/](https://opendataformat.github.io/)
 #'
 #' @author
 #'

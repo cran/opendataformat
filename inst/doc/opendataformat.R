@@ -167,6 +167,35 @@ getmetadata_odf(df, type = "description")
 #    languages = c("en", "de")
 #  )
 
+## ----as_odf_tbl, comment = "", eval = FALSE-----------------------------------
+#  #Create a data frame with four variables ind 5 rows
+#  exampledata <- data.frame(id = 1:5,
+#                            name = c("Klaus", "Anna", "Rebecca",
+#                                     "Kevin", "Janina"),
+#                            age = c(55, 40, 19, 25, 60),
+#                            diagnosis = c(1,3,3,2,1))
+#  # Add metadata for dataset according to ODF tibble framework.
+#  attr(exampledata, "name") <- "patientdata"
+#  attr(exampledata, "label_en") <- "Patient Data"
+#  attr(exampledata, "description_en") <- "Patient database of the practice Dr. Sommer"
+#  attr(exampledata, "url") <- "www.example.url.en"
+#  
+#  # Add metadata for diagnosis variable with label, description and value labels.
+#  attr(exampledata$id, "name") <- "id"
+#  attr(exampledata$id, "label_en") <- "Patiend ID"
+#  attr(exampledata$id, "description_en") <- "Practice Patiend ID"
+#  attr(exampledata$diagnosis, "name") <- "diagnose"
+#  attr(exampledata$diagnosis, "label_en") <- "Diagnosis"
+#  attr(exampledata$diagnosis, "description_en") <- "Diagnosis patient last visit"
+#  valuelabels_diagnosis <- 1:4
+#  names(valuelabels_diagnosis) <- c("Covid", "Influenza", "Common cold", "Tonsillitis")
+#  attr(exampledata$diagnosis, "labels_en") <- valuelabels_diagnosis
+#  # use as_odf_bl to transform dataframe to an ODF tibble ('odf_tbl'-class object)
+#  example_odf  <-  as_odf_tbl(exampledata)
+#  
+#  # Display metadata of diagnosis Variable
+#  docu_odf(example_odf$diagnosis, style = "print")
+
 ## ----table, comment = ""------------------------------------------------------
 table(df$bap87, useNA = "ifany")
 
