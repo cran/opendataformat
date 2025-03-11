@@ -5,8 +5,6 @@
 #' @import xml2
 #' @import data.table
 #' @import tibble
-#' @importFrom zip zip_list unzip
-#'
 #'
 #' @param file
 #' the name of the file which the data are to be read from.
@@ -45,7 +43,7 @@
 #' @export
 #' @examples
 #' # get path to example data from the opendataformat package (data.zip)
-#' path  <-  system.file("extdata", "data.zip", package = "opendataformat")
+#' path  <-  system.file("extdata", "data.odf.zip", package = "opendataformat")
 #' path
 #'
 #' # read example data specified as Open Data Format from ZIP file
@@ -83,25 +81,42 @@ read_odf  <-  function(file,
   if (!file.exists(file)) {
     stop("Error: The specified zip file does not exist.")
   }
-  # Step 2: List contents of the zip file
+  
   zip_filelist <- zip::zip_list(file)$filename
-  if (!("data.csv" %in% zip_filelist) | !("metadata.xml" %in% zip_filelist)){
+  #read version file
+  if ("odf-version.json" %in% zip_filelist){
+    vers_file <- jsonlite::fromJSON(unz(file, "odf-version.json"))
+    odf_vers =  vers_file$version
+    data_file = vers_file$files$data
+    metadata_file = vers_file$files$metadata
+  } else {
+    odf_vers =  "1.0.0"
+    data_file = "data.csv"
+    metadata_file = "metadata.xml"
+  }
+  version_major <- unlist(strsplit(odf_vers, "\\."))[1]
+  version_minor <- unlist(strsplit(odf_vers, "\\."))[2]
+  version_path <- unlist(strsplit(odf_vers, "\\."))[3]
+  
+  # Step 2: Check content of zip-file
+  if (!(data_file %in% zip_filelist) | !(metadata_file %in% zip_filelist)){
     stop("Error: Expected data.csv and metadata.xml in specified zip.")
   }
   
+  
   # load the data csv "data.csv"
   # Unzip the file to a temporary location
-  zip::unzip(file, files = "data.csv", exdir = tempdir(), overwrite = TRUE)
+  zip::unzip(file, files = data_file, exdir = tempdir(), overwrite = TRUE)
   if (skip  !=  0) {
     if (is.null(select)) {
-      cnames <- names(data.table::fread(file.path(tempdir(), "data.csv"),
+      cnames <- names(data.table::fread(file.path(tempdir(), data_file),
                                         skip = 0, nrows = 1,
                                         na.strings = na.strings))
-      data  <-  data.table::fread(file.path(tempdir(), "data.csv"),
+      data  <-  data.table::fread(file.path(tempdir(), data_file),
                                   skip = skip + 1, nrows = nrows,
                                   col.names = cnames, na.strings = na.strings)
     } else {
-      cnames <- names(data.table::fread(file.path(tempdir(), "data.csv"),
+      cnames <- names(data.table::fread(file.path(tempdir(), data_file),
                                         skip = 0, nrows = 0,
                                         na.strings = na.strings))
       if (class(select) %in% c("numeric", "integer")) {
@@ -109,23 +124,23 @@ read_odf  <-  function(file,
       } else {
         cindex <- which(cnames %in% select)
       }
-      data  <-  data.table::fread(file.path(tempdir(), "data.csv"),
+      data  <-  data.table::fread(file.path(tempdir(), data_file),
                                   select = cindex, header = FALSE,
                                   skip = skip + 1,
                                   nrows = nrows, col.names = cnames[cindex],
                                   na.strings = na.strings)
     }
   } else {
-    data  <-  data.table::fread(file.path(tempdir(), "data.csv"),
+    data  <-  data.table::fread(file.path(tempdir(), data_file),
                                 select = select, skip = skip, nrows = nrows,
                                 na.strings = na.strings)
   }
-  data <- as_tibble(data)
+  data <- tibble::as_tibble(data)
   #attr(data, "spec") <- NULL
   
   
   #read xml from zipped folder
-  metadata <- xml2::read_xml(x = unz(file, "metadata.xml"), encoding = "UTF-8")
+  metadata <- xml2::read_xml(x = unz(file, metadata_file), encoding = "UTF-8")
   
   #Extract study name
   study_metadata <- xml2::xml_children(metadata)[grep("<stdyDscr>",
@@ -192,8 +207,6 @@ read_odf  <-  function(file,
   } else {
     attr(data, "url") <- ""
   }
-  
-  
   
   #Extract variable description
   variable_metadata <- xml2::xml_children(
@@ -333,3 +346,4 @@ read_odf  <-  function(file,
   
   return(data)
 }
+

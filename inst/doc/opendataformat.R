@@ -7,23 +7,15 @@ knitr::opts_chunk$set(
 ## ----setup, eval=FALSE--------------------------------------------------------
 #  
 #  # At this point you can download and install the the latest version of the
-#  # opendataformat package from Zenodo:
-#  install.packages(
-#    "https://zenodo.org/records/13683314/files/opendataformat_1.2.1.tar.gz",
-#    repos = NULL, method = "libcurl")
-#  
-#  
-#  # Alternatively you can install the development version from GitHub:
-#  devtools::install_git(
-#    "https://github.com/opendataformat/r-package-opendataformat.git")
-#  
+#  # opendataformat package from CRAN:
+#  install.packages("opendataformat")
 #  
 #  
 
 ## ----read_odf-----------------------------------------------------------------
 library(opendataformat)
 
-path <- system.file("extdata", "data.zip", package = "opendataformat")
+path <- system.file("extdata", "data.odf.zip", package = "opendataformat")
 df <- read_odf(file = path)
 
 ## ----view df, comment = ""----------------------------------------------------
@@ -136,34 +128,34 @@ getmetadata_odf(df, type = "description")
 ## ----write_odf, comment = "", eval = FALSE------------------------------------
 #  write_odf(
 #    x = df[, 1:4],
-#    file = "../df_1_4.zip"
+#    file = "../df_1_4.odf.zip"
 #  )
 #  
 #  #or :
 #  df_14 <- df[, 1:4]
 #  write_odf(
 #    x = df[, 1:4],
-#    file = "df_1_4.zip"
+#    file = "df_1_4.odf.zip"
 #  )
 
 ## ----write_odf metadata, comment = "", eval = FALSE---------------------------
 #  write_odf(
 #    x = df,
-#    file = "../df_metadata.zip",
+#    file = "../df_metadata.odf.zip",
 #    export_data = FALSE
 #  )
 
 ## ----write_odf english, comment = "", eval = FALSE----------------------------
 #  write_odf(
 #    x = df,
-#    file = "../df_en.zip",
+#    file = "../df_en.odf.odf.zip",
 #    languages = "en"
 #  )
 
 ## ----write_odf english german, comment = "", eval = FALSE---------------------
 #  write_odf(
 #    x = df,
-#    file = "../df_en_de.zip",
+#    file = "../df_en_de.odf.odf.zip",
 #    languages = c("en", "de")
 #  )
 

@@ -418,15 +418,8 @@ version from GitHub using the <code>install_git()</code>-function from
 the devtools-library.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># At this point you can download and install the the latest version of the</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># opendataformat package from Zenodo:</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="st">&quot;https://zenodo.org/records/13683314/files/opendataformat_1.2.1.tar.gz&quot;</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">method =</span> <span class="st">&quot;libcurl&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># Alternatively you can install the development version from GitHub:</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="st">&quot;https://github.com/opendataformat/r-package-opendataformat.git&quot;</span>)</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># opendataformat package from CRAN:</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;opendataformat&quot;</span>)</span></code></pre></div>
 <p>12917713</p>
 </div>
 </div>
@@ -447,7 +440,7 @@ example data is loaded using <code>read_odf()</code> Alternatively, you
 can set <code>file</code> to a zip-file in the working directory.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(opendataformat)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;data.zip&quot;</span>, <span class="at">package =</span> <span class="st">&quot;opendataformat&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;data.odf.zip&quot;</span>, <span class="at">package =</span> <span class="st">&quot;opendataformat&quot;</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_odf</span>(<span class="at">file =</span> path)</span></code></pre></div>
 <p>The output of the <code>read_odf()</code> function is an R-tibble
 object, that has the additional class <code>odf</code>. It has
@@ -697,7 +690,7 @@ console.</p>
 <span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;bap87&quot;</span>   <span class="st">&quot;bap9201&quot;</span> <span class="st">&quot;bap9001&quot;</span> <span class="st">&quot;bap9002&quot;</span> <span class="st">&quot;bap9003&quot;</span> <span class="st">&quot;bap96&quot;</span>   <span class="st">&quot;name&quot;</span>   </span>
 <span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a></span>
 <span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="sc">$</span>.internal.selfref</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="sc">&lt;</span>pointer<span class="sc">:</span> <span class="dv">0x0000023c0d64cf30</span><span class="sc">&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="sc">&lt;</span>pointer<span class="sc">:</span> <span class="dv">0x0000027c04a4c6a0</span><span class="sc">&gt;</span></span>
 <span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a></span>
 <span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="er">$</span>study</span>
 <span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;soep-core v38.1&quot;</span></span>
@@ -863,14 +856,14 @@ first four columns of our dataset as a new odf-file. We use the
 file name (and location if it).</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu">write_odf</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>  <span class="at">x =</span> df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_1_4.zip&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_1_4.odf.zip&quot;</span></span>
 <span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>)</span>
 <span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a></span>
 <span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="co">#or :</span></span>
 <span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>df_14 <span class="ot">&lt;-</span> df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
 <span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a><span class="fu">write_odf</span>(</span>
 <span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>  <span class="at">x =</span> df[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],</span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;df_1_4.zip&quot;</span></span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;df_1_4.odf.zip&quot;</span></span>
 <span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a>)</span></code></pre></div>
 <p>The XML file metadata.xml and the CSV file data.csv are saved within
 the directory ‘data_rec’, as well as within the ZIP file ’data_rec.zip.
@@ -938,7 +931,7 @@ metadata without including the actual data, providing a solution for
 documentation or archiving needs.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">write_odf</span>(</span>
 <span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>  <span class="at">x =</span> df,</span>
-<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_metadata.zip&quot;</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_metadata.odf.zip&quot;</span>,</span>
 <span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a>  <span class="at">export_data =</span> <span class="cn">FALSE</span></span>
 <span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>If you wish to export the dataset with the metadata only in one or
@@ -947,14 +940,14 @@ some languages, set the languages argument to
 <code>languages=&quot;all&quot;</code></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu">write_odf</span>(</span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>  <span class="at">x =</span> df,</span>
-<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_en.zip&quot;</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_en.odf.odf.zip&quot;</span>,</span>
 <span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a>  <span class="at">languages =</span> <span class="st">&quot;en&quot;</span></span>
 <span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>By default, languages is set to <code>languages=&quot;all&quot;</code>. You can
 also define a list of languages to be exported:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">write_odf</span>(</span>
 <span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>  <span class="at">x =</span> df,</span>
-<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_en_de.zip&quot;</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;../df_en_de.odf.odf.zip&quot;</span>,</span>
 <span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a>  <span class="at">languages =</span> <span class="fu">c</span>(<span class="st">&quot;en&quot;</span>, <span class="st">&quot;de&quot;</span>)</span>
 <span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a>)</span></code></pre></div>
 </div>
